@@ -8,7 +8,7 @@
 }
 
 :root {
-    --clr-gold: #DCC48E;
+    --clr-gold: #cc9004;
     --clr-beige: #EAEFD3;
     --clr-purple: #27233A;
 }
@@ -26,8 +26,7 @@ header {
     padding: 1rem;
     background-color: var(--clr-beige);
     color: var(--clr-purple);
-    border-bottom-left-radius: 3rem;
-    border-bottom-right-radius: 3rem;
+   
 }
 
 main {
@@ -39,11 +38,11 @@ main {
     text-align: center;
 }
 
-.instrucciones {
+.instructions {
     margin-bottom: 2rem;
 }
 
-.marcador {
+.marker {
     background-color: var(--clr-gold);
     padding: 1rem 2rem;
     border-radius: 1rem;
@@ -55,7 +54,7 @@ main {
     margin-bottom: 2rem;
 }
 
-.marcador .nombre {
+.marker .name {
     position: absolute;
     color: var(--clr-beige);
     background-color: var(--clr-purple);
@@ -66,35 +65,35 @@ main {
 
 }
 
-.marcador .nombre-jugador {
+.marker .player-name {
     right: 85%;
 }
 
-.marcador .nombre-computadora {
+.marker .pc-name {
     left: 85%;
 }
 
-.marcador .puntos {
+.marker .points {
     font-size: 1.6rem;
 }
 
-.elegi-tu-arma {
+.weapon {
     margin-bottom: 2rem;
 }
 
-.elegi-tu-arma h2 {
+.weapon h2 {
     font-size: 1.2rem;
     font-weight: 400;
     margin-bottom: .5rem;
 }
 
-.armas {
+.weapons {
     display: flex;
     justify-content: center;
     gap: 1rem;
 }
 
-.arma {
+.pick {
     font-size: 2rem;
     background-color: var(--clr-beige);
     border: 0;
@@ -103,12 +102,12 @@ main {
     cursor: pointer;
 }
 
-.mensaje {
+.message {
     margin-bottom: 2rem;
     line-height: 1.8;
 }
 
-.mensaje .eleccion {
+.message .choose {
     color: var(--clr-purple);
     background-color: var(--clr-gold);
     border-radius: .25rem;

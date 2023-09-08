@@ -1,102 +1,116 @@
-let puntosUsuario = 0;
-let puntosPC = 0;
+let UserPoints = 0;
+let PCPoints = 0;
 
-let instrucciones = document.querySelector("#instrucciones");
-let contenedorPuntosUsuario = document.querySelector("#puntos-usuario");
-let contenedorPuntosPC = document.querySelector("#puntos-computadora");
-let mensaje = document.querySelector("#mensaje");
-let contenedorGanaPunto = document.querySelector("#gana-punto");
-let elegiTuArma = document.querySelector("#elegi-tu-arma");
+let instructions = document.querySelector("#instructions");
+let containerUser = document.querySelector("#user-points");
+let containerPC = document.querySelector("#pc-points");
+let message = document.querySelector("#message");
+let pointContainer = document.querySelector("#win-point");
+let weapon = document.querySelector("#weapon");
 
-let contenedorEleccionUsuario = document.querySelector("#eleccion-usuario");
-let contenedorEleccionPC = document.querySelector("#eleccion-computadora");
+let containerUserMove = document.querySelector("#user-move");
+let containerPCMove = document.querySelector("#pc-move");
+let restart = document.querySelector("#restart")
 
-let botonesArmas = document.querySelectorAll(".arma");
-botonesArmas.forEach(boton => {
-    boton.addEventListener("click", iniciarTurno);
+let weapons = document.querySelectorAll(".pick");
+weapons.forEach(b => {
+    b.addEventListener("click", Start);
 });
 
-function iniciarTurno(e) {
+function Start(e) {
     
-    let eleccionPC = Math.floor(Math.random() * 3);
-    let eleccionUsuario = e.currentTarget.id;
+    let PCMove = Math.floor(Math.random() * 3);
+    let userMove = e.currentTarget.id;
 
 
 
-    if (eleccionPC === 0) {
-        eleccionPC = "piedra🦾";
-    } else if (eleccionPC === 1) {
-        eleccionPC = "papel📋"
-    } else if (eleccionPC === 2) {
-        eleccionPC = "tijera✂️"
+    if (PCMove === 0) {
+        PCMove = "piedra";
+    } else if (PCMove === 1) {
+        PCMove = "papel"
+    } else if (PCMove === 2) {
+        PCMove = "tijera"
     }
 
   
 
     if (
-        (eleccionUsuario === "piedra🦾" && eleccionPC === "tijera✂️") ||
-        (eleccionUsuario === "tijera✂️" && eleccionPC === "papel📋") ||
-        (eleccionUsuario === "papel📋" && eleccionPC === "piedra🦾")
+        (userMove === "rock-btn" && PCMove === "tijera") ||
+        (userMove === "scissors-btn" && PCMove === "papel") ||
+        (userMove === "paper-btn" && PCMove === "piedra")
     ) {
-        ganaUsuario();
+        UserWins();
     } else if (
-        (eleccionPC === "piedra🦾" && eleccionUsuario === "tijera✂️") ||
-        (eleccionPC === "tijera✂️" && eleccionUsuario === "papel📋") ||
-        (eleccionPC === "papel📋" && eleccionUsuario === "piedra🦾")
+        (PCMove === "piedra" && userMove === "scissors-btn") ||
+        (PCMove === "tijera" && userMove === "paper-btn") ||
+        (PCMove === "papel" && userMove === "rock-btn")
     ) {
-        ganaPC();
+        PCWins();
     } else {
-        empate();
+        Draw();
     }
 
-    mensaje.classList.remove("disabled");
-    contenedorEleccionUsuario.innerText = eleccionUsuario;
-    contenedorEleccionPC.innerText = eleccionPC;
-
-    if (puntosUsuario === 5 || puntosPC === 5) {
-
-        if (puntosUsuario === 5) {
-            instrucciones.innerText = "🔥 ¡Ganaste el juego! 🔥"
-        }
-
-        if (puntosPC === 5) {
-            instrucciones.innerText = "😭 ¡La computadora ganó el juego! 😭"
-        }
-
-        elegiTuArma.classList.add("disabled");
-        reiniciar.classList.remove("disabled");
-        reiniciar.addEventListener("click", reiniciarJuego);
-    }
-
-
-}
-
-function ganaUsuario() {
-    puntosUsuario++;
-    contenedorPuntosUsuario.innerText = puntosUsuario;
-    contenedorGanaPunto.innerText = "¡Ganaste un punto! 🔥"
-}
-
-function ganaPC() {
-    puntosPC++;
-    contenedorPuntosPC.innerText = puntosPC;
-    contenedorGanaPunto.innerText = "¡La computadora ganó un punto! 😭"
-}
-
-function empate() {
-    contenedorGanaPunto.innerText = "¡Empate! 😱"
-}
-
-function reiniciarJuego() {
-    reiniciar.classList.add("disabled");
-    elegiTuArma.classList.remove("disabled");
-    mensaje.classList.add("disabled");
-
-    puntosUsuario = 0;
-    puntosPC = 0;
+    message.classList.remove("disabled");
     
-    contenedorPuntosUsuario.innerText = puntosUsuario;
-    contenedorPuntosPC.innerText = puntosPC;
+    if (userMove === "paper-btn")
+    {
+    containerUserMove.innerText = "papel";
+    }
+    else if (userMove === "rock-btn")
+    {
+    containerUserMove.innerText = "piedra";
+    }
+    else if (userMove === "scissors-btn")
+    {
+        containerUserMove.innerText = "tijera";
+    }
 
-    instrucciones.innerText = "El primero en llegar a 5 puntos gana."
+    containerPCMove.innerText = PCMove;
+
+    if (UserPoints === 5 || PCPoints === 5) {
+
+        if (UserPoints === 5) {
+            instructions.innerText = "🔥 ¡Ganaste el juego! 🔥"
+        }
+
+        if (PCPoints === 5) {
+            instructions.innerText = "😭 ¡La computadora ganó el juego! 😭"
+        }
+
+        weapon.classList.add("disabled");
+        restart.classList.remove("disabled");
+        restart.addEventListener("click", Restart);
+    }
+
+
+}
+
+function UserWins() {
+    UserPoints++;
+    containerUser.innerText = UserPoints;
+    pointContainer.innerText = "¡Ganaste un punto!"
+}
+
+function PCWins() {
+    PCPoints++;
+    containerPC.innerText = PCPoints;
+    pointContainer.innerText = "¡La computadora ganó un punto!"
+}
+
+function Draw() {
+    pointContainer.innerText = "¡Empate! "
+}
+
+function Restart() {
+    restart.classList.add("disabled");
+    weapon.classList.remove("disabled");
+    message.classList.add("disabled");
+
+    UserPoints = 0;
+    PCPoints = 0;
+    
+    containerUser.innerText = UserPoints;
+    containerPC.innerText = PCPoints;
+
+    instructions.innerText = "El primero en llegar a 5 puntos gana."
 }
